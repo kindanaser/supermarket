@@ -6,8 +6,8 @@ import 'dotenv/config';
 // import wishlistRouter from './wishlist/wishlist.router.js'
 // import couponRouter from './coupon/coupon.router.js'
 // import orderRouter from './order/order.router.js'
-// import authRouter from './auth/auth.router.js'
-// import userRouter from './user/user.router.js'
+import authRouter from './auth/auth.router.js'
+import userRouter from './user/user.router.js'
 import connectDB from '../../DB/connection.js'
  
 const initApp = (app,express)=>{
@@ -16,8 +16,8 @@ const initApp = (app,express)=>{
     app.get('/',(req,res)=>{
         return res.status(201).json({message:"success"})
      })
-    // app.use('/auth',authRouter)
-    // app.use('/user',userRouter) 
+    app.use('/auth',authRouter)
+    app.use('/user',userRouter) 
     // app.use('/categories',categoriesRouter)
     // app.use('/subcategory',subcategoryRouter)
     // app.use('/products',productsRouter)

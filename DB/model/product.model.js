@@ -1,0 +1,76 @@
+import { Schema, Types, model } from 'mongoose';
+
+const productSchema = new Schema({
+     name:{
+        type:String,
+        required:true,
+        unique:true,
+        trim:true
+     },
+     slug:{
+        type:String,
+        required:true,
+     },
+     description:{
+        type:String,
+        required:true,
+     },
+     image:{
+        type:Object,
+        required:true,
+     },
+     subImages:[{
+        type:Object,
+        required:true,
+     }],
+     stock:{
+        type:Number,
+        default:1
+     },
+     price:{
+        type:Number,
+     },
+     discount:{
+        type:Number,
+        default:0
+     },
+     finalPrice:{
+      type:Number,   
+     },
+    status:{
+        type:String,
+        default:'Active',
+        enum:['Active','NotActive']
+    }, 
+    sizes:[{
+        type:String,
+        enum:['S','M','L','XL']
+    }],
+    colors:{String},
+    categoryId:{
+      type:Types.ObjectId,
+      ref:'Category',
+      required:true,
+    },
+    subCategoryId:{
+        type:Types.ObjectId,
+        ref:'Subcategory',
+        required:true,
+      },
+    createdBy:{
+        type:Types.ObjectId,
+        ref:'User',
+    },
+    updatedBy:{
+        type:Types.ObjectId,
+        ref:'User',
+    }
+},
+{
+    timestamps:true,
+    toJSON:{virtuals:true},
+    toObject:{virtuals:true}
+});
+
+const productModel = model('Product',productSchema);
+export default productModel;
